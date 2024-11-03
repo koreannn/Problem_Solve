@@ -1,4 +1,3 @@
-'''
 k=3 -->
 
 - 3일 이후부터는 해당 날짜에서 나온 점수가 기존 명예의 전당 점수들보다 클 경우 전당에 올라가고,
@@ -7,13 +6,14 @@ k=3 -->
 - 발표 점수란, k=3짜리 배열(?) 에서 가장 낮은 점수를 의미
 
 - score와 k값을 통해 발표점수를 반환해내야 함
-'''
 
-# 이런거 안됨
-# sort()는 원본을 바꿈
-# l = [10, 20, 30, 40, 50]
-# k = 3
 
-# rank = l[:k].sort(reverse=True) # None : sort() 별도 반환값 없이 원본을 바꾸고, 반환값은 None이므로 의도랑 다르게 작동
-# rank = sorted(l[:k], reverse=True) # 이게 맞음
-# print(rank)
+이런거 안됨 (sort()는 원본을 바꿈)
+```python
+l = [10, 20, 30, 40, 50]
+k = 3
+
+rank = l[:k].sort(reverse=True) # None : sort() 별도 반환값 없이 원본을 바꾸고, 반환값은 None이므로 의도랑 다르게 작동
+rank = sorted(l[:k], reverse=True) # 이게 맞음
+print(rank)
+```
