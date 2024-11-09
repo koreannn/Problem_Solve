@@ -1,8 +1,13 @@
-n = int(input())
-num = []
+import sys
 
-for i in range(n):
-    num.append(int(input()))
+n = int(sys.stdin.readline())
+count = [0]*10001
+
+for _ in range(n):
+    num = int(sys.stdin.readline())
+    count[num] += 1
     
-num.sort()
-print(num)
+for idx in range(len(count)):
+    if count[idx] != 0:
+        for _ in range(count[idx]):
+            print(idx)
