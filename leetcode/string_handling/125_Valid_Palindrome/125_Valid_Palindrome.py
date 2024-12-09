@@ -14,5 +14,5 @@ class Solution:
         return char_list == inversed_char_list
 
 # test
-print(Solution().isPalindrome("A man, a plan, a canal: Panama"))
-print(Solution().isPalindrome("race a car"))
+print(Solution().isPalindrome("A man, a plan, a canal: Panama")) # True
+print(Solution().isPalindrome("race a car")) # False

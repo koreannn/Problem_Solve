@@ -5,9 +5,8 @@ class Solution:
         """
         
         '''
-        s = list(reversed(s))
-        또는
-        s = s[::-1]
+        <1. In-place 연산>
+        s = list(reversed(s)) 이나, s = s[::-1]은        
         in-place 연산이 아님 (새로운 리스트 객체를 생성하고, s가 이걸 새로 참조하도록 만듬)
         
         기존 리스트의 내용을 직접 역순으로 수정하려면
@@ -17,7 +16,6 @@ class Solution:
         return s
         
 '''
-<다른 풀이(가연 풀이)>
 class Solution:
     def reverseString(self, s: List[str]) -> None:
         left, right = 0, len(s) - 1
