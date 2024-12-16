@@ -44,5 +44,4 @@ class Solution:
             if target - n in nums_map:
                 return [nums_map[target - n], i]
             nums_map[n] = i
-
 '''

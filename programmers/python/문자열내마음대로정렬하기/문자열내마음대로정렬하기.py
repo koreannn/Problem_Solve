@@ -14,6 +14,7 @@ def solution(strings, n):
             
         answer.append(min_string)
         strings.remove(min_string)
+        
     # 2. 사전순 정렬 (버블 정렬로 해봤음)
     for i in range(len(answer)-1):
         for l in range(len(answer)-1-i):
@@ -26,5 +27,3 @@ def solution(strings, n):
 # test
 print(solution(["sun", "bed", "car"], 1))
 print(solution(["abce", "abcd", "cdx"], 2))
-
-

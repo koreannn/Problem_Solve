@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/hong/Documents/Problem_Solve/programmers/output/tmp'
+relocations:     []
+...
