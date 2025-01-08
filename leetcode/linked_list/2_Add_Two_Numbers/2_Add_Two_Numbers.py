@@ -4,7 +4,16 @@ class ListNode:
         self.val = val
         self.next = next
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers2(self, l1: list, l2: list) -> list:
+        l1_origin = l1[::-1]
+        l2_origin = l2[::-1]
+        carry = 0
+        max_length = len(l1_origin) if len(l1_origin)>len(l2_origin) else len(l2_origin)
+        
+        for i in range(max_length):
+            
+        
+    def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:
         dummy = ListNode()
         curr = dummy
         carry = 0

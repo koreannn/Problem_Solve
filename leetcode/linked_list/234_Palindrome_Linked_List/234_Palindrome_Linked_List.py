@@ -43,7 +43,6 @@ class Solution:
             head = head.next
         return vals == vals[::-1]
 
-# Helper function to create linked list from Python list
 def create_linked_list(arr):
     if not arr:
         return None
