@@ -18,7 +18,7 @@ while queue:
     
     for next_pos in (curr-1, curr+1, curr*2):
         if (next_pos>=0 and next_pos<=MAX) and visited[next_pos] == -1:
-            visited[next_pos] = visited[curr]+1
+            visited[next_pos] = visited[curr]+1 # 방문한곳 모두에 대해 시간 표시
             queue.append(next_pos)
             
 print(answer)

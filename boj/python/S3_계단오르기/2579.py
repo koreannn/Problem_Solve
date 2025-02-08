@@ -12,5 +12,3 @@ for i in range(3, N+1):
 # dp[i-3]+stairs_scores[i-1] : 세 칸 전의 계단을 밟고, 마지막 계단 전의 계단을 밝고, 마지막 계단을 밟을 경우
 
 print(dp[N])
-
-

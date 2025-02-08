@@ -14,7 +14,6 @@ while(1):
     if count < N:
         max_len -= 1
     else:
-        print(count)
         break
     
 print(max_len)
