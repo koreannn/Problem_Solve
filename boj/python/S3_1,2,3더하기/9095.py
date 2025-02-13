@@ -26,7 +26,7 @@ for _ in range(T):
 
 for num in answer:
     print(num)
-    
+
 '''
 점화식을 직접 써보기나 해보자.
 '''
