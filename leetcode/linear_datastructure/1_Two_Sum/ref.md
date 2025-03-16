@@ -1,6 +1,6 @@
 풀이는 매우 쉽지만, 최적화된 풀이에 있어서는 깊이 생각해볼만한 가치가 있는 문제입니다.
 
-1. 브루트 포스 방식
+# 1. 브루트 포스 방식
 ```python
 class Solution:
     def twosum(self, nums: list[int], target:int) -> list[int]:
@@ -11,7 +11,7 @@ class Solution:
 ```
 이렇게 풀면, 시간복잡도는 O(n^2)이 됩니다. 매우 비효율적인 풀이이므로, 다른 방법에 대해 고민해야합니다.
 
-2. in연산, index() 사용
+# 2. in연산, index() 사용
 ```python
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
@@ -24,7 +24,7 @@ class Solution:
 다만, 1번처럼 파이썬 레벨에서 매번 값을 비교하는 방식과 달리, 2번 방식의 in, index연산은 C언어로 구현되어있어, 메모리 접근, 캐시 활용 효율성 등의 측면에서 조금 더 나은 시간복잡도를 가질 수 있습니다.
 
 
-3. 해시테이블
+# 3. 해시테이블
 ```python
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
