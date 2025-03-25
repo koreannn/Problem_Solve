@@ -8,9 +8,6 @@ for _ in range(n):
     is_checked_char = set()
     
     for i in range(len(word)):
-        
-        changed = False
-        
         if i==0:
             is_checked_char.add(word[i])
             continue

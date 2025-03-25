@@ -1,22 +1,12 @@
-N, M = map(int, input().split())
-answer_list = []
-count = 0
+"""
+N: 듣지도 못한 사람 수 / M: 보지도못한 사람수
+"""
+n, m = map(int, input().split())
 
-N_set = set()
-M_list = []
+n_set = {input() for _ in range(n)}
+m_set = {input() for _ in range(m)}
 
-for _ in range(N):
-    N_set.add(input())
+answer = sorted(n_set & m_set)
 
-for _ in range(M):
-    M_list.append(input())
-
-for i in range(len(M_list)):
-    if M_list[i] in N_set:
-        answer_list.append(M_list[i])
-        count+=1
-
-answer_list.sort()
-print(count)
-for i in range(count):
-    print(answer_list[i])
+print(len(answer))
+print('\n'.join(answer))

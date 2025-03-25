@@ -1,26 +1,11 @@
-# N = int(input())
-# people_dict = {}
+n = int(input())
+info = []
 
-# for _ in range(N):
-#     age, name = input().split()
-#     people_dict[age] = name
-
-# sorted_dict = sorted(people_dict.items(), key=lambda x: x[0])
-
-# for i in range(N):
-#     print(sorted_dict[i][0], sorted_dict[i][1])
-
-N = int(input())
-# people_list = [[]]
-people_list = []
-
-for i in range(N):
+for _ in range(n):
     age, name = input().split()
-    people_list.append((int(age), name))
-    # people_list[i].append(age)
-    # people_list[i].append(name)
+    info.append((age, name))
 
-sorted_list = sorted(people_list, key=lambda x: x[0])
+info.sort(key=lambda information:information[0])
 
-for age, name in sorted_list:
-    print(age, name)
+for i in range(n):
+    print(info[i][0], info[i][1])
