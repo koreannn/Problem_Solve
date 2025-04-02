@@ -1,27 +1,20 @@
-# X가 3으로 나누어 떨어지면, 3으로 나눈다.
-# X가 2로 나누어 떨어지면, 2로 나눈다.
-# 1을 뺀다.
-# 힌트: N = 10이라면, 10 -> 9 -> 3 -> 1 의 과정으로 연산할 때, 연산횟수 3회로 최소 횟수이다.
+n = int(input())
+counts = [0]*1000001
 
-answer = 0 # 연산 횟수
-N = int(input())
+counts[1] = 0
+counts[2] = 1
+counts[3] = 1
 
-# dp = []
-# dp[1] = 0
-# dp[2] = 1
-# dp[3] = 1
-# dp[4] = 2 (4 -> 2 -> 1 / 4 -> 3 -> 1)
-# dp[5] = 3 (5 -> 4 -> 2 -> 1)
-# dp[6] = 2 (6 -> 3 -> 1 / 6 -> 2 -> 1)
-# dp[7] = 3 (7 -> 6 -> 3 -> 1 / 7 -> 6 -> 2 -> 1)
+for i in range(4, len(counts)):
+    curr = i
+    min_val = counts[curr-1] # 1을 뺴는 경우부터 고려해주기
+    
+    if curr % 2 == 0:
+        min_val = min(min_val, counts[curr//2])
+    
+    if curr % 3 == 0:
+        min_val = min(min_val, counts[curr//3])
+    
+    counts[curr] = min_val + 1 # 마지막에 1 더하기(1을 뺴거나, 2로 나누거나, 3으로 나누거나)
 
-mem = [0]*1000001
-mem[1] = 0 
-mem[2] = 1
-mem[3] = 1
-# ...
-# mem[i]: i를 만드는데 필요한 연산 횟수
-
-for i in range(4, 1000002):
-    while(i!=1):
-        
+print(counts[n])
