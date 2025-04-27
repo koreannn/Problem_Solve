@@ -11,6 +11,11 @@ def is_same(num_list: list) -> bool:
         first = i
     return True
         
+def get_freq(num_list: list) -> int:
+    counter = Counter(num_list)
+    most_common = counter.most_common()
+    max_freq = most_common[0][1] 
+
 n = int(input())
 num_list = [int(input()) for _ in range(n)]
 num_list.sort()
