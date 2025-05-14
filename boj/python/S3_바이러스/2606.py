@@ -18,7 +18,7 @@ for i in range(connected_num):
         connected_info[val].append(key)
 
 def dfs(node):
-    if node in answer:
+    if node in answer: # 이미 방문한곳에 대한 처리
         return
     answer.add(node)
     for neighbor in connected_info.get(node, []):
