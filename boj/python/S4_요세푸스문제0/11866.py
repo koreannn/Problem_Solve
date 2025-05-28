@@ -1,12 +1,11 @@
-n, k = map(int, input().split())
-n_list = list(range(1, n+1))
-count = 0
-answer = []
-curr_idx = 0
+from collections import deque
 
-while n_list:    
-    if count == k:
-        answer.append(n_list.pop(curr_idx))
-        count = 0
-    count += 1
-    curr_idx += 1
+n, k = map(int, input().split())
+queue = deque(range(1, n+1))
+result = []
+
+while queue:
+    queue.rotate(-(k-1))
+    result.append(queue.popleft())
+
+print("<" + ", ".join(map(str, result)) + ">")
