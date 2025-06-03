@@ -9,3 +9,8 @@ while queue:
     result.append(queue.popleft())
 
 print("<" + ", ".join(map(str, result)) + ">")
+
+"""
+rotate(1): 시계방향으로 1칸 회전
+rotate(-1): 반시계 방향으로 1칸 회전
+"""
