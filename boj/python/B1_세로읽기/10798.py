@@ -1,13 +1,14 @@
-words = [input() for _ in range(5)] # 5개의 단어
-answer = []
+words = [input() for _ in range(5)]
+answer = ''
 
-max_len = max(len(s) for s in words)
+max_length = len(max(words, key=lambda x:len(x)))
 
-for i in range(max_len):
-    result = ''
-    for word in words:
-        if i < len(word):
-            result+=word[i]
-    answer.append(result)
+for l in range(max_length):
+    for i in range(5):
+        if words[i] != "":
+            answer += words[i][0]
+            words[i] = words[i][1:]
+        else:
+            continue
 
-print(''.join(answer))
+print(answer)
