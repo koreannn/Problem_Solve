@@ -1,24 +1,14 @@
-"""
-- 최소공배수 = a*b // 최대공약수
-- 최대공약수 구하는 방식: a,b = b, a%b 반복(b=0)일때까지
+from math import lcm
 
-"""
-
+# def lcm(a, b):
+#     return (a*b) // gcd(a, b)
+    
 t = int(input())
 answer = []
 
-def gdc(a, b): # 최대공약수
-    while b!= 0:
-        a, b = b, a%b # 10,24 => 24, 10 -> 10, 4 -> 4, 2 -> 2, 0
-    return a
-
-def lmc(a, b): # 최소공배수
-    num = a*b // gdc(a, b)
-    return num
-
 for _ in range(t):
     a, b = map(int, input().split())
-    answer.append(str(lmc(a, b)))
-
+    curr = lcm(a, b)
+    answer.append(str(curr))
+    
 print('\n'.join(answer))
-
