@@ -9,4 +9,4 @@ else:
         dp[i] = dp[i-1] + dp[i-2]
     answer = dp[n]
     
-    print(answer)
+print(answer)
