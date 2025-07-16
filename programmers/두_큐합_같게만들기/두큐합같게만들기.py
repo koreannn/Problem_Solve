@@ -1,27 +1,38 @@
-"""
-- 큐: 선입선출
-- 주어지는 두 개의 큐는 길이가 같음
-    - 주어지는 큐의 길이가 같은거고, 연산 후에도 길이가 같아야한다는 조건은 없음
-- 값의 삽입(insert)과 추출(pop)을 최소한의 횟수만큼만 수행하여 두 큐의 합이 같도록 만들기.
-    - 삽입과 추출을 묶어서 한 번의 연산으로 간주함
-- 본 문제에서 큐는 리스트로 구현함
-- 어떻게 해도 같게 만들 수 없는 경우 -> answer = -1
+from collections import deque
 
-- e.g.
-    queue1 = [3,2,7,2] -> 합: 14
-    queue2 = [4,6,5,1] -> 합: 16
-
-    방법 1. 
-        queue2에서 4,6,5를 순서대로 추출 -> queue1에 삽입 -> 연산 횟수(answer): 3 -> queue1 = [3,2,7,2,4,6,5] / queue2 = [1]
-        queue1에서 3,2,7,2를 순서대로 추출 -> queue2에 삽입 -> 연산횟수(answer): 4 -> queue1 = [4,6,5] / queue2 = [1,3,2,7,2]
-        총 연산 횟수 7
-        
-    방법 2.
-        queue1에서 3을 추출 -> queue2에 삽입 -> 연산 횟수(answer): 1 -> queue1 = [2,7,2] / queue2 = [4,6,5,1,3]
-        queue2에서 4를 추출 -> queue1에 삽입 -> 연산횟수(answer): 1 -> queue1 = [2,7,2,4] / queue2 = [6,5,1,3]
-        총 연산횟수 2
-"""
 def solution(queue1, queue2):
-    answer = -1
-    return answer
+    answer = 0
+    
+    q1, q2 = deque(queue1), deque(queue2)
+    sum1, sum2 = sum(q1), sum(q2)
+    
+    if (sum1+sum2)%2 != 0:
+        answer = -1
+        return answer
+    
+    limit = (len(q1)+len(q2))*2
+    
+    while answer <= limit:
+        if sum1 == sum2:
+            return answer
+        elif sum1 > sum2:
+            q1_poped = q1.popleft()
+            sum1 -= q1_poped
+            
+            q2.append(q1_poped)
+            sum2 += q1_poped
+        else: # sum1 < sum2
+            q2_poped = q2.popleft()
+            sum2 -= q2_poped
+            
+            q1.append(q2_poped)
+            sum1 += q2_poped
+            
+        answer += 1
+        
+    return -1
 
+# test
+print(solution([3, 2, 7, 2], [4, 6, 5, 1])) # 2
+print(solution([1, 2, 1, 2], [1, 10, 1, 2])) # 7
+print(solution([1, 1], [1, 5])) # -1
