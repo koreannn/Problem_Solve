@@ -24,21 +24,18 @@ e.g.
 더미 노드를 붙일 때는 원래 길이보다 딱 한 단계 더 길게 만들어야함 -> 길이 탐색
 """
 
-def binary_search(search_area: list, target: int):
-    left_idx, right_idx = 0, len(search_area)-1
-    mid_idx = (right_idx + left_idx)//2
+def dfs(binary, index, tree_depth) -> bool: # 가능한 경우라면 True를 반환
+    if tree_depth == 0: # 리프 노드에 도달한 경우
+        return True
     
-    while left_idx <= right_idx:
-        if search_area[mid_idx] < target and search_area[mid_idx+1] > target:
-            return search_area[mid_idx+1]
+    elif binary[index] == '0':
+        if binary[index-tree_depth] == '1' or binary[index+tree_depth] == '1':
+            return False
+    
+    left_sub_search = dfs(binary, index-tree_depth, tree_depth//2) # 왼쪽 서브트리 탐색
+    right_sub_search = dfs(binary, index+tree_depth, tree_depth//2) # 오른쪽~
+    return left_sub_search and right_sub_search
         
-        if search_area[mid_idx] < target:
-            left_idx = mid_idx + 1
-        elif search_area[mid_idx] > target:
-            right_idx = mid_idx - 1
-    return
-
-
 def solution(numbers):
     answer = []
     len_list = []
@@ -52,13 +49,14 @@ def solution(numbers):
     # 주어진 수를 이진수로 만들고, 이진 탐색을 통해 딱 한 단계 더 긴 길이로 만들기(더미 노드 추가)
     for num in numbers:
         curr_bin = bin(num)[2:]
-        revised_length = binary_search(len_list, len(curr_bin))
+        
+        for i in range(len(len_list)):
+            if len_list[i] >= len(curr_bin):
+                revised_length = len_list[i]
         revised_curr_bin = "0"*(revised_length - len(curr_bin)) + curr_bin
             
-        for i in range(len(revised_length)):
-            if i%2 == 0 and revised_curr_bin[i] == '0':
-                answer.append(0)
-                break
+        result = dfs(revised_curr_bin, len(revised_curr_bin), (len(revised_curr_bin)+1)//4)
+        answer.append(1 if result else 0)
     
     return answer
 
