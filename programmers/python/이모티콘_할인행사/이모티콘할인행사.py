@@ -27,51 +27,36 @@ m: 이모티콘 개수 (1 <= <= 7)
         각 이모티콘의 할인율은 10, 20, 30, 40% -> 이모티콘마다 다름
         
 풀이 방식:
-    각 이모티콘에 가장 높은 할인율을 적용해보고, 가장 싼 이모티콘 할인율부터 낮춰본다.
-    e.g.
-    [[40, 10000], [25, 10000]] & [7000, 9000]
-    1. 40%, 40% -> 9600, 9600 -> 구독0명, 금액 9600*2원
-    2. 30%, 40% -> 5400, 구독 -> 구독1명, 금액 5400원
-    3. 20%, 40% -> 5400, 5400 -> 구독0명, 금액5400*2원
-
-
+    할인율 맵을 만들고, 각각의 할인율에 대해 [구독자수, 판매금액] 을 담아놓고 나중에 정렬시켜본다
+    e.g. [7000, 9000] 4^2가지 -> 이모티콘 개수가 7개라면, 4^7(2^14)가지
+    40, 40
+    30, 40
+    20, 40
+    10, 40
+    
+    40, 30
+    30, 30
+    20, 30
+    10, 30
+    
+    40, 20
+    30, 20
+    20, 20
+    10, 20
+    
+    40, 10
+    30, 10
+    20, 10
+    10, 10
 """
 
 def solution(users, emoticons):
     answers = []
-    sorted_emo = sorted(emoticons) # 오름차순 정렬된 이모티콘 가격
-    sorted_emo_dict = {price: 40 for price in sorted_emo}
-    idx = 0 # 할인율 낮출 이모티콘 탐색용 인덱스
     
-    for _ in range(len(emoticons)*4): # 각각에 대해  40%, 30%, 20%, 10%를 모두 적용해보아야하므로, *4
-        curr_sales_amount = 0
-        curr_subscribers = 0
-        
-        for person in users:
-            threshold = 0 # 그 사람이 구독을 할지말지 결정되는 금액
-            for price in sorted_emo_dict:
-                if person[0] <= sorted_emo_dict[price]: # 그 사람의 기준보다 더 많이 할인할 경우에만
-                    threshold += price * ((100 - sorted_emo_dict[price]) / 100.0)
-            
-            if threshold >= person[1]:
-                curr_subscribers += 1
-            else:
-                curr_sales_amount += threshold
-                
-        answers.append([curr_subscribers, curr_sales_amount])
-        
-        # 할인율 낮추기(싼 이모티콘부터)
-        if sorted_emo_dict[sorted_emo[idx]] == 10:
-            idx += 1
-        else:
-            sorted_emo_dict[sorted_emo[idx]] -= 10
-        
-    # answers 정렬
-    answers.sort(key=lambda x: (x[0], x[1]), reverse=True)
-        
-    return answers[0]
-
 
 # Test
 print(solution([[40, 10000], [25, 10000]], [7000, 9000])) # [1, 5400]
 print(solution([[40, 2900], [23, 10000], [11, 5200], [5, 5900], [40, 3100], [27, 9200], [32, 6900]], [1300, 1500, 1600, 4900])) # [4, 13860]
+
+
+
