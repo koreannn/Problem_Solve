@@ -1,40 +1,55 @@
-"""
-2024 네이버 신입 공채 문제
+from typing import List, Dict, Set
 
-- emotions: 각 식물들의 초기 상태 -> e.g. emotions[i]: i+1번째 식물의 초기 상태
-- 값이 0보다 클 경우 기분이 좋은것
-- orders: 각 사이클마다 물을 주는 식물 번호 -> e.g. orders[i]: i+1번쨰 사이클에 해당 식물에게 물을 주었음을 의미
-- 물을 받은 식물은 0이 되지 않은 이상, 기분이 초기 상태로 돌아감
-    e.g. emotions = [2,3,1,2] / orders = [3,1,2,1,4,1]
+class Node:
+    def __init__(self, initial: int):
+        self.initial = initial
+        
+        
+def solution(emotions: List[int], orders: List[int]) -> List[int]:
+    answer = [0] * len(orders)
     
-
-- 한 사이클이 지날떄마다 상태값이 1씩 감소(0이 되면 더이상 기분이 좋지 않음)
-- 한번 0이 되면 물을 줘도 기분이 좋아지지 않음
-
-"""
-import copy
-
-def solution(emotions, orders) -> list:
-    answer = []
-    origin_emotions = copy.deepcopy(emotions)
+    idx_map = {}
+    key_map = {}
+    nodes = [None] * (len(emotions) + 1)
     
+    for i, emo in enumerate(emotions):
+        node = Node(emo)
+        idx_map.setdefault(emo, set()).add(node)
+        key_map[node] = emo
+        nodes[i + 1] = node
+
+    curr = 1
     for order in orders:
-        curr = 0
+        node = nodes[order]
         
-        for i in range(len(emotions)):
-            if emotions[i] != 0 and i != order - 1:
-                emotions[i] -= 1
+        if node in key_map:
+            prev_idx = key_map[node]
+            bucket = idx_map.get(prev_idx)
+            
+            if bucket is not None:
+                bucket.discard(node)
+                if not bucket:
+                    del idx_map[prev_idx]
+            
+            next_idx = curr + node.initial
+            key_map[node] = next_idx
+            idx_map.setdefault(next_idx, set()).add(node)
+                
+        # 현재 시점(curr)에서 만료될 노드들은 제거
+        if curr in idx_map:
+            for n in list(idx_map[curr]):
+                key_map.pop(n, None)
+            del idx_map[curr]
         
-        if emotions[order - 1] > 0:
-            emotions[order - 1] = origin_emotions[order - 1]
-        
-        for emo in emotions:
-            if emo > 0:
-                curr += 1
-        answer.append(curr)
-        print(emotions)
+        # 현재 행복한 식물의 수
+        answer[curr - 1] = len(key_map)
+        curr += 1
     
     return answer
 
-# test
-print(solution([2,3,1,2], [3,1,2,1,4,1])) # [4, 2, 2, 2, 2, 1]
+if __name__ == "__main__":
+    print(solution([2, 3, 1, 2], [3, 1, 2, 1, 4, 1])) # [4, 2, 2, 2, 2, 1]
+    print(solution([5, 5, 5], [1, 2, 1, 2, 3])) # [3, 3, 3, 3, 3]
+    print(solution([5, 5, 5], [1, 2, 1, 2, 1])) # [3, 3, 3, 3, 2]
+    print(solution([2, 1, 3, 4, 3], [2, 2, 2, 2, 5, 5, 5])) # [5, 4, 2, 1, 0, 0, 0]
+    
