@@ -3,7 +3,7 @@ import random
 class RandomizedSet:
     def __init__(self):
         self.data_list = []
-        self.data_map = {} 
+        self.data_map = {}
 
     def insert(self, val: int) -> bool:
         if val in self.data_map:
